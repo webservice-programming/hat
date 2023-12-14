@@ -136,6 +136,8 @@ public class PostController extends HttpServlet {
     	}
         return "detail_page.jsp";
     }
+    
+    
 
     public String register(HttpServletRequest request) {
         Post post = new Post();
@@ -160,23 +162,48 @@ public class PostController extends HttpServlet {
         }
         return "detail_page.jsp";
     }
+    
+    //리뷰 수정
+    public String editReview(HttpServletRequest request) {
+    	Post post = new Post();
+    	Review review = new Review();
+    	List<Review> reviews;
+    	
+    	try {
+    		BeanUtils.populate(review, request.getParameterMap());
+            reviewDao.updateReview(review);
+            int pid = review.getPid();
+            post = dao.getPostById(pid);
+            reviews = reviewDao.getReviewsByPid(pid);
+            
+            request.setAttribute("post", post);
+            request.setAttribute("reviews", reviews);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		ctx.log("리뷰 정 과정에서 문제 발생");
+    		request.setAttribute("error", "리뷰가 정상적으로 등록되지 않았습니다.");
+    		return category(request);
+    	}
+    	return "detail_page.jsp";
+    }
 
     public String edit(HttpServletRequest request) {
         Post post = new Post();
+        List<Review> reviews;
 
         try {
             BeanUtils.populate(post, request.getParameterMap());
             dao.updatePost(post);
             int pid = post.getPid();
             post = dao.getPostById(pid);
-            List<Review> reviews = reviewDao.getReviewsByPid(pid);
+            reviews = reviewDao.getReviewsByPid(pid);
             
             request.setAttribute("post", post);
             request.setAttribute("reviews", reviews);
         } catch (Exception e) {
             e.printStackTrace();
-            ctx.log("게시물 추가 과정에서 문제 발생!!");
-            request.setAttribute("error", "게시물이 정상적으로 등록되지 않았습니다!!");
+            ctx.log("게시물 수정 과정에서 문제 발생");
+            request.setAttribute("error", "게시물이 정상적으로 등록되지 않았습니다");
             return category(request);
         }
         return "detail_page.jsp";

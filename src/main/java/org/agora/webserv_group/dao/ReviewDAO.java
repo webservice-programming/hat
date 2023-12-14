@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.agora.webserv_group.model.Post;
 import org.agora.webserv_group.model.Review;
 
 public class ReviewDAO {
@@ -29,6 +30,25 @@ public class ReviewDAO {
 			pstmt.executeUpdate();
 		}
 	}
+	
+	//리뷰 수정
+    public void updateReview(Review review) throws SQLException {
+        Connection conn = connectionMaker.makeNewConnection();
+        int rid = review.getRid();
+        String updateSql = "UPDATE review SET title = ?, content = ?, score = ?, WHERE rid = ?";
+        PreparedStatement pstmt = conn.prepareStatement(updateSql);
+
+        try (conn; pstmt) {
+            pstmt.setString(1, review.getTitle());
+            pstmt.setString(2, review.getContent());
+            pstmt.setInt(3, review.getScore());
+            pstmt.setInt(6,  rid);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 	
     public int getLastId() throws Exception {
         Connection conn = connectionMaker.makeNewConnection();
