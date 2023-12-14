@@ -125,6 +125,7 @@ public class PostController extends HttpServlet {
             int pid = Integer.parseInt(request.getParameter("pid"));
             post = dao.getPostById(pid);
             request.setAttribute("post", post);
+            
             List<Review> reviews = reviewDao.getReviewsByPid(pid);
             request.setAttribute("reviews", reviews);
     	} catch (Exception e) {
@@ -148,6 +149,7 @@ public class PostController extends HttpServlet {
             int pid = dao.getLastId();
             post = dao.getPostById(pid);
             request.setAttribute("post", post);
+            
             List<Review> reviews = reviewDao.getReviewsByPid(pid);
             request.setAttribute("reviews", reviews);
         } catch (Exception e) {
@@ -165,13 +167,16 @@ public class PostController extends HttpServlet {
         try {
             BeanUtils.populate(post, request.getParameterMap());
             dao.updatePost(post);
-            post = dao.getPostById(post.getPid());
-
+            int pid = post.getPid();
+            post = dao.getPostById(pid);
+            List<Review> reviews = reviewDao.getReviewsByPid(pid);
+            
             request.setAttribute("post", post);
+            request.setAttribute("reviews", reviews);
         } catch (Exception e) {
             e.printStackTrace();
             ctx.log("게시물 추가 과정에서 문제 발생!!");
-            request.setAttribute("error", "게시물가 정상적으로 등록되지 않았습니다!!");
+            request.setAttribute("error", "게시물이 정상적으로 등록되지 않았습니다!!");
             return category(request);
         }
         return "detail_page.jsp";
@@ -198,8 +203,8 @@ public class PostController extends HttpServlet {
             dao.delPost(pid);
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.log("뉴스 삭제 과정에서 문제 발생!!");
-            request.setAttribute("error", "뉴스가 정상적으로 삭제되지 않았습니다!!");
+            ctx.log("게시글 삭제 과정에서 문제 발생");
+            request.setAttribute("error", "게시글이 정상적으로 삭제되지 않았습니다.");
             return category(request);
         }
 
@@ -215,8 +220,8 @@ public class PostController extends HttpServlet {
             dao.addPeople(post, uid);
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.log("뉴스 삭제 과정에서 문제 발생!!");
-            request.setAttribute("error", "뉴스가 정상적으로 삭제되지 않았습니다!!");
+            ctx.log("회원가입 과정에서 문제 발생");
+            request.setAttribute("error", "회원가입이 정상적으로 처리되지 않았습니다.");
             return category(request);
         }
 
@@ -232,8 +237,8 @@ public class PostController extends HttpServlet {
             dao.removePeople(post, uid);
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.log("뉴스 삭제 과정에서 문제 발생!!");
-            request.setAttribute("error", "뉴스가 정상적으로 삭제되지 않았습니다!!");
+            ctx.log("뉴스 삭제 과정에서 문제 발생");
+            request.setAttribute("error", "뉴스가 정상적으로 삭제되지 않았습니다.");
             return category(request);
         }
 
@@ -248,8 +253,8 @@ public class PostController extends HttpServlet {
             dao.closePost(pid);
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.log("뉴스 삭제 과정에서 문제 발생!!");
-            request.setAttribute("error", "뉴스가 정상적으로 삭제되지 않았습니다!!");
+            ctx.log("뉴스 삭제 과정에서 문제 발생");
+            request.setAttribute("error", "뉴스가 정상적으로 삭제되지 않았습니다.");
             return category(request);
         }
 
