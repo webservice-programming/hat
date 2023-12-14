@@ -1,7 +1,9 @@
 package org.agora.webserv_group.controller;
 
 import org.agora.webserv_group.dao.PostDAO;
+import org.agora.webserv_group.dao.ReviewDAO;
 import org.agora.webserv_group.model.Post;
+import org.agora.webserv_group.model.Review;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -24,6 +26,7 @@ public class PostController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private PostDAO dao;
+    private ReviewDAO reviewDao;
     private ServletContext ctx;
 
     // 웹 리소스 기본 경로 지정
@@ -110,6 +113,28 @@ public class PostController extends HttpServlet {
         }
         return "postlist.jsp";
     }
+    
+    //리뷰 등록
+    public String registerReview(HttpServletRequest request) {
+    	Post post = new Post();
+    	Review review = new Review();
+    	try {
+    		BeanUtils.populate(review, request.getParameterMap());
+            review.setUid(Integer.parseInt(request.getParameter("uid")));
+            reviewDao.addReview(review);
+            int pid = Integer.parseInt(request.getParameter("pid"));
+            post = dao.getPostById(pid);
+            request.setAttribute("post", post);
+            List<Review> reviews = reviewDao.getReviewsByPid(pid);
+            request.setAttribute("reviews", reviews);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		ctx.log("리뷰 등록 과정에서 문제 발생!!");
+    		request.setAttribute("error",  "리뷰가 정상적으로 등록되지 않았습니다!!");
+    		return category(request);
+    	}
+        return "detail_page.jsp";
+    }
 
     public String register(HttpServletRequest request) {
         Post post = new Post();
@@ -123,10 +148,12 @@ public class PostController extends HttpServlet {
             int pid = dao.getLastId();
             post = dao.getPostById(pid);
             request.setAttribute("post", post);
+            List<Review> reviews = reviewDao.getReviewsByPid(pid);
+            request.setAttribute("reviews", reviews);
         } catch (Exception e) {
             e.printStackTrace();
             ctx.log("게시물 추가 과정에서 문제 발생!!");
-            request.setAttribute("error", "게시물가 정상적으로 등록되지 않았습니다!!");
+            request.setAttribute("error", "게시물이 정상적으로 등록되지 않았습니다!!");
             return category(request);
         }
         return "detail_page.jsp";
@@ -155,6 +182,8 @@ public class PostController extends HttpServlet {
         try {
             Post post = dao.getPostById(pid);
             request.setAttribute("post", post);
+            List<Review> reviews = reviewDao.getReviewsByPid(pid);
+            request.setAttribute("reviews", reviews);
         } catch (Exception e) {
             e.printStackTrace();
             ctx.log("게시물 목록 생성 과정에서 문제 발생!!");
