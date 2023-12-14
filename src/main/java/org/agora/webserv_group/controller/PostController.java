@@ -223,6 +223,21 @@ public class PostController extends HttpServlet {
         }
         return "detail_page.jsp";
     }
+    
+    //리뷰 삭제
+    public String deleteReview (HttpServletRequest request) {
+    	int rid = Integer.parseInt(request.getParameter("rid"));
+    	try {
+    		reviewDao.delReview(rid);
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		ctx.log("리뷰 삭제 과정에서 문제 발생");
+    		request.setAttribute("error",  "리뷰가 정상적으로 삭제되지 않았습니다.");
+    		return category(request);
+    	}
+    	return category(request);
+    }
+    
 
     public String delete(HttpServletRequest request) {
         int pid = Integer.parseInt(request.getParameter("pid"));
