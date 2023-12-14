@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>아고라</title>
+  <title>DAMOA</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
@@ -42,7 +42,7 @@
           <div class="form-group mb-3">
             <input type="password" class="form-control" id="input-pwd" placeholder="비밀번호" name="userPassword" maxlength="20">
           </div>
-          <button type="button" class="btn btn-dark" onclick="onclick_link_multi_val('user', 'login', ['uid', 'upw'], ['input-id', 'input-pwd'])">로그인</button>
+          <button type="button" class="btn text-white" style="background-color: #F36F60" onclick="onclick_link_multi_val('user', 'login', ['uid', 'upw'], ['input-id', 'input-pwd'])">로그인</button>
 
           <div style="text-align: center;"><!-- 찾기 버튼 병렬 용 -->
 <!-- 아이디 찾기 버튼 -->
@@ -101,7 +101,7 @@
 <!-- 회원가입 버튼 -->
         <div class="d-grid gap-2 col-6 mx-auto">
           <hr>
-          <button type="button" class="btn btn-dark" onclick="onclick_static('SignUp.jsp')">회원가입</button>
+          <button type="button" class="btn text-white" style="background-color: #F36F60" onclick="onclick_static('SignUp.jsp')">회원가입</button>
         </div>
       </div>
     </div>

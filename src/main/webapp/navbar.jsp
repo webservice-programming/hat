@@ -12,9 +12,9 @@ To change this template use File | Settings | File Templates.
 <link rel="stylesheet" href="css/navbar.css" />
 
 <!-- Responsive navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #F36F60">
   <div class="container">
-    <a class="navbar-brand" href="<c:url value="/"/>">아고라</a>
+    <a class="navbar-brand text-white" href="<c:url value="/"/>">DAMOA</a>
     <button
       class="navbar-toggler"
       type="button"

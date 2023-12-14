@@ -17,19 +17,18 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
           crossorigin="anonymous"
     />
-    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
 <%-- 페이지 컨텐츠: 사실상의 body --%>
 <div class="container">
     <%-- 검색 창 --%>
-    <div class="card text-white bg-secondary my-5 py-4 text-center">
+    <div class="card text-success my-5 py-5 text-center" style="background-image: url('assets/main.png'); background-size: 600px 400px; background-position: center;">
         <div class="card-body">
-            <h2 class="card-title mb-3" id="test-id">모임을 찾아보세요</h2>
-            <div class="input-group mb-3 px-5">
-                <input type="text" class="form-control" placeholder="게시글 제목을 입력해보세요" aria-label="게시글 제목 입력" aria-describedby="search-button" id="search-input-id" />
-                <button class="btn btn-dark" type="button" id="search-button" onclick="onclick_link_innerval('post', 'search', 'pname', 'search-input-id');">검색</button>
+            <div class="input-group mb-3 mx-auto" style="max-width: 800px; height: 70px;">
+                <input type="text" class="form-control" placeholder="모임을 검색해보세요" aria-label="모임 검색" aria-describedby="search-button" id="search-input-id" style="font-size: 18px;"/>
+                <button class="btn text-white" style="width: 110px; background-color: #F36F60;" type="button" id="search-button" onclick="onclick_link_innerval('post', 'search', 'pname', 'search-input-id');">검색</button>
             </div>
         </div>
     </div>
@@ -39,7 +38,7 @@
             <div class="card h-100">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', 'all');">
                     <h2 class="card-title">전체</h2>
-                    <p class="card-text">어떤 모임들이 있나 먼저 둘러보세요.<br/>다양한 분들이 모집하는 다양한 모임들이 있습니다.</p>
+                    <p class="card-text"><br/>다양한 모임을 찾아보세요.</p>
                 </div>
             </div>
         </div>
@@ -47,7 +46,7 @@
             <div class="card h-100">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', '공부');">
                     <h2 class="card-title">공부</h2>
-                    <p class="card-text">다양한 공부를 같이 해보세요.<br/>문학, 코딩, 전공 등등...</p>
+                    <p class="card-text"><br/>공부 모임을 찾아보세요.</p>
                 </div>
             </div>
         </div>
@@ -55,7 +54,7 @@
             <div class="card h-100">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', '독서');">
                     <h2 class="card-title">독서</h2>
-                    <p class="card-text">책을 다함께 읽어 보아요.<br/>독서 토론도 가능합니다.</p>
+                    <p class="card-text"><br/>독서 모임을 찾아보세요.</p>
                 </div>
 
             </div>
@@ -64,7 +63,7 @@
             <div class="card h-100">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', '식사');">
                     <h2 class="card-title">식사</h2>
-                    <p class="card-text">다양한 분들과 다양한 음식을 먹어보세요.<br/>한식, 양식, 주류 등등...</p>
+                    <p class="card-text"><br/>식사 모임을 찾아보세요.</p>
                 </div>
             </div>
         </div>
@@ -72,7 +71,7 @@
             <div class="card h-100">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', '운동');">
                     <h2 class="card-title">운동</h2>
-                    <p class="card-text">어떤 운동이든 모집해 보세요.<br/>구기종목 같은 협력, PT같은 1:1운동 모두 좋습니다.</p>
+                    <p class="card-text"><br/>운동 모임을 찾아보세요.</p>
                 </div>
             </div>
         </div>
