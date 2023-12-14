@@ -49,6 +49,20 @@ public class ReviewDAO {
         }
     }
     
+    //리뷰 삭제
+    public void delReview(int rid) throws SQLException {
+        Connection conn = connectionMaker.makeNewConnection();
+        String sql = "delete from review where rid = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        try(conn; pstmt) {
+            pstmt.setInt(1, rid);
+            // 삭제된 리뷰가 없을 경우
+            if(pstmt.executeUpdate() == 0) {
+                throw new SQLException("DB에러");
+            }
+        }
+    }
+    
 	
     public int getLastId() throws Exception {
         Connection conn = connectionMaker.makeNewConnection();

@@ -203,7 +203,7 @@ public class PostDAO {
         PreparedStatement pstmt = conn.prepareStatement(sql);
         try(conn; pstmt) {
             pstmt.setInt(1, pid);
-            // 삭제된 뉴스 기사가 없을 경우
+            // 삭제된 게시글이 없을 경우
             if(pstmt.executeUpdate() == 0) {
                 throw new SQLException("DB에러");
             }
