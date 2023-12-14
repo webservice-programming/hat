@@ -15,7 +15,7 @@ public class ReviewDAO {
 		connectionMaker = new ConnectionMaker();
 	}
 	
-	public void addPost(Review review) throws Exception {
+	public void addReview(Review review) throws Exception {
 		Connection conn = connectionMaker.makeNewConnection();
 		String sql = "insert into review(title, content, score, pid, uid) values(?,?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -29,6 +29,16 @@ public class ReviewDAO {
 			pstmt.executeUpdate();
 		}
 	}
+	
+    public int getLastId() throws Exception {
+        Connection conn = connectionMaker.makeNewConnection();
+        String sql = "select scope_identity() as last_id from review";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery(sql);
+        String lastId = rs.getString("last_id");
+
+        return Integer.parseInt(lastId);
+    }
 	
 	public List<Review> getReviewsByPid(int pid) throws SQLException {
 		Connection conn = connectionMaker.makeNewConnection();
