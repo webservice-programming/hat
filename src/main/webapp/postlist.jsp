@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>아고라</title>
+    <title>DAMOA</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -31,11 +31,11 @@
     <jsp:include page="navbar.jsp"/>
     <%--  페이지 컨텐츠  --%>
     <div class="container">
-      <div class="row d-flex align-items-center justify-content-between my-5 mx-1 px-1 py-1 category-bar">
-        <div class="col-md-auto">
+      <div class="row d-flex align-items-center justify-content-between my-5 mx-auto px-1 py-1 category-bar" style="height:3rem; width:50rem; border:0">
+        <div class="col-md-auto" >
           <div class="btn-group">
             <button
-                    class="btn btn-outline-secondary btn-lg dropdown-toggle"
+                    class="btn btn-outline-secondary btn-sm dropdown-toggle"
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -52,62 +52,43 @@
           </div>
         </div>
         <div class="col">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="제목을 입력해 검색" aria-label="search input" aria-describedby="btn-search" id="search-value">
-            <button class="btn btn-outline-secondary" type="button" id="btn-search" onclick="onclick_link_innerval('post', 'search', 'pname', 'search-value');">검색</button>
+          <div class="input-group input-group-sm">
+            <input type="text" class="form-control " placeholder="제목 검색" aria-label="search input" aria-describedby="btn-search" id="search-value" >
+            <button class="btn btn-outline-secondary btn-sm " type="button" id="btn-search" onclick="onclick_link_innerval('post', 'search', 'pname', 'search-value');">검색</button>
           </div>
         </div>
-        <div class="col-md-auto">
-          <button type="button" class="btn btn-outline-secondary" onclick="location.href = 'post_register.jsp'">글쓰기</button>
-        </div>
-
-
       </div>
 
 <%-- 게시글 동적 렌더링 --%>
-        <c:forEach var="post" items="${posts}">
-            <div class="row px-1 py-1 mt-2">
-                <div class="col">
-                    <div class="card mb-4 clickable-tag"
-                         onclick="onclick_link('post', 'detail', 'pid', ${post.getPid()});">
-                        <div class="card-header d-flex align-items-end">
-                            <h4 class="px-1" >
-                                <c:choose>
-                                    <c:when test="${post.getIs_end() == false}">
-                                        <span class="badge bg-success">모집중</span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span class="badge bg-danger">모집완료</span>
-                                    </c:otherwise>
-                                </c:choose>
-                            </h4>
-                            <h3 class="ms-3 px-1" >${post.getTitle()}</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="me-1 list_detail"><span>${post.getLocation()}</span></p>
-                            <p class="px-5 py-3">${post.getIntroduction()}</p>
-                            <p class="d-flex justify-content-between list_detail">
-                                <span>${post.getPeople().size()}/${post.getCapacity()}명</span><span>${post.getCreated_at()}</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
 
-      <%-- Pagination --%>
-<%--      <nav aria-label="Pagination">--%>
-<%--        <hr class="my-0" />--%>
-<%--        <ul class="pagination justify-content-center my-4">--%>
-<%--          <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">&lt;&lt;</a></li>--%>
-<%--          <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>--%>
-<%--          <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--          <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--          <li class="page-item disabled"><a class="page-link" href="#">번호 동적 생성</a></li>--%>
-<%--          <li class="page-item"><a class="page-link" href="#">15</a></li>--%>
-<%--          <li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>--%>
-<%--        </ul>--%>
-<%--      </nav>--%>
+     <c:forEach var="post" items="${posts}">
+     <div>
+         <div class="d-flex" style="border-bottom:1px solid lightgray; justify-content:space-between; padding: 0 50px;margin-bottom:50px">
+             <h5 class="d-flex ms-5"style="align-items:center" >
+                 <c:choose>
+                     <c:when test="${post.getIs_end() == false}">
+                         <span class="badge bg-danger">모집중</span>
+                     </c:when>
+                     <c:otherwise>
+                         <span class="badge bg-dark">모집완료</span>
+                     </c:otherwise>
+                 </c:choose>
+             </h5>
+             <div class="d-flex mt-1" style="width:50rem; justify-content:flex-end"
+                  onclick="onclick_link('post', 'detail', 'pid', ${post.getPid()});">    
+                     <h5>${post.getTitle()}</h5>
+                     <p style="margin-left:120px"><span>${post.getLocation()}</span></p>
+                     <p style="margin-left:120px"><span>${post.getPeople().size()}/${post.getCapacity()}명</span></p>
+                     <p style="margin-left:120px"><span>${post.getCreated_at()}</span></p>
+             </div>
+         </div>
+      </div>
+     </c:forEach>
+     <div class="d-flex justify-content-end my-5">
+          <button type="button" class="btn btn-outline-danger btn-md" onclick="location.href = 'post_register.jsp'">글 등록</button>
+     </div>
+
+
 
     </div>
 

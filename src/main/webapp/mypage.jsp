@@ -13,84 +13,81 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<div class="row px-1 py-1 mt-2">
+<div class="container my-5">
   <div class="col">
-    <div class="card mb-4">
-      <div class="card-header d-flex justify-content-center">
-        <h3 class="px-1" >내정보</h3>
+    <div class="card border-danger mb-4">
+      <div class="d-flex justify-content-center">
+        <h4 class="px-1" >About User</h4>
       </div>
-      <div class="card-body">
-        <ul>
-          <li class="px-1" style="font-size: 24px">이름: ${user.name}</li>
-          <li class="px-1" style="font-size: 24px">이메일: ${user.email}</li>
-          <li class="px-1" style="font-size: 24px">아이디: ${user.uid}</li>
-        </ul>
+      <div class="d-flex justify-content-between">
+	     <div class="col d-flex justify-content-center">이름: ${user.name}</div>
+	     <div class="col d-flex justify-content-center">이메일: ${user.email}</div>
+	     <div class="col d-flex justify-content-center">아이디: ${user.uid}</div>
       </div>
     </div>
   </div>
 </div>
-<h2>내 게시물</h2>
+<div class="container">
+<h4 class="mx-5">내 게시물</h4>
 <c:forEach var="post" items="${mypost}">
   <div class="row px-1 py-1 mt-2">
     <div class="col">
-      <div class="card mb-4 clickable-tag"
+      <div class="card border-danger mb-4 clickable-tag"
            onclick="onclick_link('post', 'detail', 'pid', ${post.getPid()});">
-        <div class="card-header d-flex align-items-end">
-          <h4 class="px-1" >
+        <div class="card-header d-flex align-items-end" style="background-color:#fde2df">
+          <h5 class="px-1" >
             <c:choose>
               <c:when test="${post.is_end == true}">
-                <span class="badge bg-danger">모집완료</span>
+                <span class="badge bg-black">모집완료</span>
               </c:when>
               <c:otherwise>
-                <span class="badge bg-success">모집중</span>
+                <span class="badge bg-danger">모집중</span>
               </c:otherwise>
             </c:choose>
-          </h4>
-          <h3 class="ms-3 px-1" >${post.getTitle()}</h3>
+          </h5>
+          <h6 class="ms-3 px-1" >${post.getTitle()}</h6>
         </div>
         <div class="card-body">
-            <%--              <p class="me-1 list_detail"><span class="me-3">모집종료날짜</span><span class="ms-5">지역</span></p>--%>
-          <p class="me-1 list_detail"><span>${post.location}</span></p>
-          <p class="px-5 py-3">${post.introduction}</p>
-          <p class="d-flex justify-content-between list_detail">
-            <span>${post.people.size()}/${post.capacity}명</span><span>${post.getCreated_at()}</span>
+          <p class="ms-1"><span>${post.location}</span></p>
+          <p class="ms-1">소개글 :</p>
+          <p class="w-7">${post.introduction}</p>
+          <p class="d-flex justify-content-end">${post.getCreated_at()}
           </p>
         </div>
       </div>
     </div>
   </div>
 </c:forEach>
-<h2>그룹 게시물</h2>
+<h4 class="mx-5">그룹 게시물</h4>
 <c:forEach var="post" items="${group}">
-  <div class="row px-1 py-1 mt-2">
+  <div class="container">
     <div class="col">
-      <div class="card mb-4 clickable-tag"
+      <div class="card border-danger mb-4 clickable-tag"
            onclick="onclick_link('post', 'detail', 'pid', ${post.getPid()});">
-        <div class="card-header d-flex align-items-end">
-          <h4 class="px-1" >
+        <div class="card-header d-flex align-items-end" style="background-color:#fde2df">
+          <h5 class="px-1" >
             <c:choose>
               <c:when test="${post.getIs_end() == false}">
-                <span class="badge bg-success">모집중</span>
+                <span class="badge bg-danger">모집중</span>
               </c:when>
               <c:otherwise>
-                <span class="badge bg-danger">모집완료</span>
+                <span class="badge bg-black">모집완료</span>
               </c:otherwise>
             </c:choose>
-          </h4>
-          <h3 class="ms-3 px-1" >${post.getTitle()}</h3>
+          </h5>
+          <h5 class="ms-3 px-1">${post.getTitle()}</h5>
         </div>
-        <div class="card-body">
-            <%--              <p class="me-1 list_detail"><span class="me-3">모집종료날짜</span><span class="ms-5">지역</span></p>--%>
-          <p class="me-1 list_detail"><span>${post.getLocation()}</span></p>
-          <p class="px-5 py-3">${post.getIntroduction()}</p>
-          <p class="d-flex justify-content-between list_detail">
-            <span>${post.getPeople().size()}/${post.getCapacity()}명</span><span>${post.getCreated_at()}</span>
-          </p>
-        </div>
+      <div class="card-body">
+        <p ><span class="ms-1">장소 : ${post.getLocation()}</span></p>
+        <p class="ms-1">소개글 :</p>     
+        <p class=" w-7">${post.getContent()}</p>
+        <p class="d-flex justify-content-end"><span>${post.updated_at}</span></p>
+      </div>
       </div>
     </div>
   </div>
 </c:forEach>
+</div>
 <jsp:include page="footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

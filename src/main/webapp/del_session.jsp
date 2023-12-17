@@ -12,7 +12,7 @@
 %>
 <html>
 <head>
-    <title>아고라</title>
+    <title>DAMOA</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 </head>
 <body>

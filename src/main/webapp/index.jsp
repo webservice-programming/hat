@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>아고라</title>
+    <title>DAMOA</title>
     <!-- Favicon(사이트 타이틀 옆 파비콘) -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- 코어 CSS/Core theme CSS (부트스트랩 작동에 필요/includes Bootstrap) -->
@@ -26,52 +26,51 @@
     <%-- 검색 창 --%>
     <div class="card text-success my-5 py-5 text-center" style="background-image: url('assets/main.png'); background-size: 600px 400px; background-position: center;">
         <div class="card-body">
-            <div class="input-group mb-3 mx-auto" style="max-width: 800px; height: 70px;">
-                <input type="text" class="form-control" placeholder="모임을 검색해보세요" aria-label="모임 검색" aria-describedby="search-button" id="search-input-id" style="font-size: 18px;"/>
-                <button class="btn text-white" style="width: 110px; background-color: #F36F60;" type="button" id="search-button" onclick="onclick_link_innerval('post', 'search', 'pname', 'search-input-id');">검색</button>
+            <div class="input-group mb-3 mx-auto" style="max-width: 800px; height: 100px;">
+                <input type="text" class="form-control" placeholder="모임을 검색해보세요" aria-label="모임 검색" aria-describedby="search-button" id="search-input-id" style="font-size: 18px; height:5rem"/>
+                <button class="btn text-white" style="width: 110px; height:5rem; background-color: #F36F60;" type="button" id="search-button" onclick="onclick_link_innerval('post', 'search', 'pname', 'search-input-id');">검색</button>
             </div>
         </div>
     </div>
     <%--  카테고리 목록들  --%>
-    <div class="row gx-4 gx-lg-5">
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
+    <div class="d-flex justify-content-between" style="height:200px">
+        <div class="mb-5" >
+            <div class="card w-70 h-70" >
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', 'all');">
-                    <h2 class="card-title">전체</h2>
-                    <p class="card-text"><br/>다양한 모임을 찾아보세요.</p>
+                    <h2 class="card-title d-flex justify-content-center">전체</h2>
+                    <p class="card-text"><br/>다양한 모임을 찾아보세요</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
+        <div class="mb-5">
+            <div class="card w-70 h-70">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', '공부');">
-                    <h2 class="card-title">공부</h2>
-                    <p class="card-text"><br/>공부 모임을 찾아보세요.</p>
+                    <h2 class="card-title d-flex justify-content-center">공부</h2>
+                    <p class="card-text"><br>공부 모임을 찾아보세요</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
+        <div class="mb-5">
+            <div class="card w-70 h-70">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', '독서');">
-                    <h2 class="card-title">독서</h2>
-                    <p class="card-text"><br/>독서 모임을 찾아보세요.</p>
+                    <h2 class="card-title d-flex justify-content-center">독서</h2>
+                    <p class="card-text"><br/>독서 모임을 찾아보세요</p>
                 </div>
-
             </div>
         </div>
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
+        <div class="mb-5">
+            <div class="card w-70 h-70">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', '식사');">
-                    <h2 class="card-title">식사</h2>
-                    <p class="card-text"><br/>식사 모임을 찾아보세요.</p>
+                    <h2 class="card-title d-flex justify-content-center">식사</h2>
+                    <p class="card-text"><br/>식사 모임을 찾아보세요</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
+        <div class="mb-5">
+            <div class="card w-70 h-70">
                 <div class="card-body clickable-tag" onclick="onclick_link('post', 'category', 'cname', '운동');">
-                    <h2 class="card-title">운동</h2>
-                    <p class="card-text"><br/>운동 모임을 찾아보세요.</p>
+                    <h2 class="card-title d-flex justify-content-center">운동</h2>
+                    <p class="card-text"><br/>운동 모임을 찾아보세요</p>
                 </div>
             </div>
         </div>

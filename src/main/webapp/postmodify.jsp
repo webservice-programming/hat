@@ -21,10 +21,10 @@
           <h4 class="px-1" >
             <c:choose>
               <c:when test="${post.is_end == true}">
-                <span class="badge bg-danger">모집완료</span>
+                <span class="badge bg-black">모집완료</span>
               </c:when>
               <c:otherwise>
-                <span class="badge bg-success">모집중</span>
+                <span class="badge bg-danger">모집중</span>
               </c:otherwise>
             </c:choose>
           </h4>
