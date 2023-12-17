@@ -99,19 +99,20 @@
 		<h5 class="mx-5" >이 모임의 리뷰</h5><hr>
 		<c:forEach var="review" items="${reviews}">
 			<div class="d-flex justify-content-between mx-5">
-				<p>${review.uid}님의 리뷰</p>
-				<p>${review.score}점</p>
+				<div><p class="badge bg-danger">${review.getUid()}</p>님의 리뷰 </div>
+				<p>${review.getScore()}점</p>
 			</div>
-			<h4 class="mx-5">여기제목뜸 ${review.title}</h4>
-			<p class="mx-5">내용 : ${review.content}</p><hr>
+			<h4 class="mx-5">${review.getTitle()}</h4>
+			<p class="mx-5">내용 : ${review.getContent()}</p><hr>
 		</c:forEach>
 			<c:choose>
 		      <c:when test="${post.people.contains(sessionScope.get('uid'))}">
-		      <form method="post" action="review_register.jsp">
-		          <input type="hidden" name="uid" id="uid" value="${sessionScope.get("uid")}">
-		          <input type="hidd" name="pid" id="pid" value="${post.pid}">
-		          <button class="btn" style="font-size: 18px;" type="submit">리뷰 등록하기</button>
-		      </form>
+		      	<form method="post" action="review_register.jsp">
+			          <input type="hidden" name="uid" id="uid" value="${sessionScope.get("uid")}">
+			          <input type="hidden" name="pid" id="pid" value="${post.pid}">
+			          <button class="btn" style="font-size: 18px; float:right" type="submit">리뷰 등록하기
+			          </button>
+		          </form>
 		      </c:when>
 		    </c:choose><br>
 	</div>

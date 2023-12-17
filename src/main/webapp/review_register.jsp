@@ -31,8 +31,8 @@
 			    <option value="4">4</option>
 			    <option value="5">5</option>
 			  </select><br>
-		  <input type="hidden" name="pid" id="pid" value=<%=request.getParameter("pid")%>>
-		  <input type="hidden" name="uid" id="uid" value=<%=request.getParameter("uid")%>>
+		  <input type="hidden" name="pid" id="pid" value="<%=request.getParameter("pid")%>">
+		  <input type="hidden" name="uid" id="uid" value="${sessionScope.get("uid")}">
 		  <button formaction="javascript:history.back()" class="btn" style="font-size: 18px; float:right">취소</button>
 		  <button class="btn" style="font-size: 18px; float:right" type="submit">등록</button>
 	  </div>
