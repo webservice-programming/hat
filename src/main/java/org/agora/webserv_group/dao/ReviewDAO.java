@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.agora.webserv_group.model.Post;
@@ -78,8 +79,7 @@ public class ReviewDAO {
 	public List<Review> getReviewsByPid(int pid) throws SQLException {
 		Connection conn = connectionMaker.makeNewConnection();
 		
-		String sql = "select rid, title, content, "
-				+ "score from review where pid = ?";
+		String sql = "select uid, pid, rid, title, content, score from review where pid = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pid);
 		ResultSet rs = pstmt.executeQuery();
@@ -88,15 +88,17 @@ public class ReviewDAO {
 		return reviews;
 	}
 	
-	private List<Review> getReviewsFromRs(ResultSet rs) {
+	private List<Review> getReviewsFromRs(ResultSet rs) throws SQLException {
 		List<Review> reviews = new ArrayList<>();
 		try(rs) {
 			while(rs.next()) {
 				Review review = new Review();
+				review.setUid(rs.getString("uid"));
+				review.setPid(rs.getInt("pid"));
 				review.setRid(rs.getInt("rid"));
 				review.setTitle(rs.getString("title"));
-				review.setContent(rs.getContent("content"));
-				review.setScore(rs.getScore("score"));
+				review.setContent(rs.getString("content"));
+				review.setScore(rs.getInt("score"));
 				reviews.add(review);
 			}
 			return reviews;
