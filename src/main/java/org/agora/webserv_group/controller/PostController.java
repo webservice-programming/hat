@@ -120,7 +120,7 @@ public class PostController extends HttpServlet {
     	Review review = new Review();
     	try {
     		BeanUtils.populate(review, request.getParameterMap());
-            review.setUid(Integer.parseInt(request.getParameter("uid")));
+            review.setUid(request.getParameter("uid"));
             reviewDao.addReview(review);
             int pid = Integer.parseInt(request.getParameter("pid"));
             post = dao.getPostById(pid);
@@ -180,7 +180,7 @@ public class PostController extends HttpServlet {
             request.setAttribute("reviews", reviews);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		ctx.log("리뷰 정 과정에서 문제 발생");
+    		ctx.log("리뷰 수정 과정에서 문제 발생");
     		request.setAttribute("error", "리뷰가 정상적으로 등록되지 않았습니다.");
     		return category(request);
     	}

@@ -18,7 +18,8 @@ public class ReviewDAO {
 	
 	public void addReview(Review review) throws Exception {
 		Connection conn = connectionMaker.makeNewConnection();
-		String sql = "insert into review(title, content, score, pid, uid) values(?,?,?,?,?)";
+		String sql = "insert into review(title, content, score, pid, uid) "
+				+ "values(?,?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
 		try(conn; pstmt) {
@@ -26,7 +27,7 @@ public class ReviewDAO {
 			pstmt.setString(2, review.getContent());
 			pstmt.setInt(3, review.getScore());
 			pstmt.setInt(4, review.getPid());
-			pstmt.setInt(5, review.getUid());
+			pstmt.setString(5, review.getUid());
 			pstmt.executeUpdate();
 		}
 	}
@@ -77,7 +78,8 @@ public class ReviewDAO {
 	public List<Review> getReviewsByPid(int pid) throws SQLException {
 		Connection conn = connectionMaker.makeNewConnection();
 		
-		String sql = "select rid, title, content, score from review where pid = ?";
+		String sql = "select rid, title, content, "
+				+ "score from review where pid = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pid);
 		ResultSet rs = pstmt.executeQuery();
