@@ -136,7 +136,7 @@ public class PostDAO {
     public void closePost(int pid) throws SQLException {
         Connection conn = connectionMaker.makeNewConnection();
 
-        String updateSql = "UPDATE post SET is_end = false, updated_at = CURRENT_TIMESTAMP(0) WHERE pid = ?";
+        String updateSql = "UPDATE post SET is_end = true, updated_at = CURRENT_TIMESTAMP(0) WHERE pid = ?";
         PreparedStatement pstmt = conn.prepareStatement(updateSql);
 
         try (conn; pstmt) {
